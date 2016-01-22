@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teaminator.WebApi", "WebApi\Teaminator.WebApi.csproj", "{AB3B7E3B-1DA6-4B4A-B464-B14971CD935B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teaminator.TeamcityService", "Teaminator.TeamcityService\Teaminator.TeamcityService.csproj", "{E5E9EB52-C7C3-4351-8594-5DBACFAF250E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teaminator.MissileService", "Teaminator.MissileService\Teaminator.MissileService.csproj", "{5A35A0CF-ABBF-43FC-8A2E-57A0293994CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB3B7E3B-1DA6-4B4A-B464-B14971CD935B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB3B7E3B-1DA6-4B4A-B464-B14971CD935B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB3B7E3B-1DA6-4B4A-B464-B14971CD935B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB3B7E3B-1DA6-4B4A-B464-B14971CD935B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5E9EB52-C7C3-4351-8594-5DBACFAF250E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5E9EB52-C7C3-4351-8594-5DBACFAF250E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5E9EB52-C7C3-4351-8594-5DBACFAF250E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5E9EB52-C7C3-4351-8594-5DBACFAF250E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A35A0CF-ABBF-43FC-8A2E-57A0293994CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A35A0CF-ABBF-43FC-8A2E-57A0293994CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A35A0CF-ABBF-43FC-8A2E-57A0293994CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A35A0CF-ABBF-43FC-8A2E-57A0293994CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

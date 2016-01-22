@@ -1,0 +1,19 @@
+﻿using System;
+using Microsoft.Owin.Hosting;
+
+
+namespace Teaminator.WebApi
+{
+    class ConsoleHost
+    {
+        static void Main(string[] args)
+        {
+            var host = "http://localhost:8080";
+            using (WebApp.Start<StartUp>(host))
+            {
+                Console.WriteLine("Server is running @ " + host);
+                Console.ReadLine();
+            }
+        }
+    }
+}
