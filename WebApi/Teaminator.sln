@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teaminator.WebApi", "WebApi\Teaminator.WebApi.csproj", "{AB3B7E3B-1DA6-4B4A-B464-B14971CD935B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teaminator.WebApi", "Teaminator.WebApi\Teaminator.WebApi.csproj", "{AB3B7E3B-1DA6-4B4A-B464-B14971CD935B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teaminator.TeamcityService", "Teaminator.TeamcityService\Teaminator.TeamcityService.csproj", "{E5E9EB52-C7C3-4351-8594-5DBACFAF250E}"
 EndProject

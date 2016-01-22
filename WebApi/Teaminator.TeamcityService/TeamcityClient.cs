@@ -31,7 +31,7 @@ namespace Teaminator.TeamcityService
             client.DownloadStringAsync(uri);
             client.DownloadStringCompleted += (sender, args) =>
             {
-                if (args.Cancelled) return;
+                if (args.Error != null) return;
                 var response = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildsResponse>(args.Result);
             };
         }
