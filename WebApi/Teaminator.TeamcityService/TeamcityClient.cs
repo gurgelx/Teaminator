@@ -1,39 +1,36 @@
 ﻿using System;
-using System.Configuration;
+using System.Collections.Generic;
 using System.Net;
-using System.Security.Principal;
 using System.Text;
+using System.Threading.Tasks;
 using Teaminator.Domain.Models;
 
 namespace Teaminator.TeamcityService
 {
     public class TeamcityClient
     {
-        public event EventHandler<EventArgs> BuildError;
-        public event EventHandler<EventArgs> BuildSuccess;
-        public event EventHandler<EventArgs> BuildRunning;
-
         private string CredentialToken = "";
 
         private const string builds = "httpAuth/app/rest/builds/";
-        private readonly string host;
-        public TeamcityClient(string host)
+        private readonly string _host;
+        private readonly BuildHandler _handler;
+
+
+        public TeamcityClient(string host, BuildHandler handler)
         {
-            this.host = host;
+            _host = host;
+            _handler = handler;
             SetCreds();
         }
 
-        public void GetBuilds()
+        public async Task<IEnumerable<Build>> GetBuilds()
         {
-            var uri = new Uri(host + builds);
+            var uri = new Uri(_host + builds);
             var client = CreateWebClient(uri);
 
-            client.DownloadStringAsync(uri);
-            client.DownloadStringCompleted += (sender, args) =>
-            {
-                if (args.Error != null) return;
-                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildsResponse>(args.Result);
-            };
+            string result = await client.DownloadStringTaskAsync(uri);
+            var response = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildsResponse>(result);
+            return _handler.HandleBuilds(response.build);
         }
 
         public WebClient CreateWebClient(Uri uri)
@@ -53,9 +50,15 @@ namespace Teaminator.TeamcityService
             this.CredentialToken = Convert.ToBase64String(Encoding.ASCII.GetBytes(user + ":" + password));
         }
 
-        public void GetBuild(int buildId)
+        public async Task<string> GetBuild(int buildId)
         {
-            
+            //TODO parse response etc
+            var uri = new Uri(_host + builds + buildId);
+            var client = CreateWebClient(uri);
+            string result = await client.DownloadStringTaskAsync(uri);
+            //var response = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildsResponse>(result);
+            //return _handler.HandleBuilds(response.build);
+            return result;
         }
     }
 }

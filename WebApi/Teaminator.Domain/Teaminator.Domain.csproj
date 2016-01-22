@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Build.cs" />
+    <Compile Include="Models\BuildDetails.cs" />
     <Compile Include="Models\BuildsResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

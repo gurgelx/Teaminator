@@ -14,7 +14,7 @@ namespace Teaminator.WebApi
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            var listner = new TeamcityService.TeamcityListener(new []{"", ""});
+            var listner = new TeamcityService.TeamcityListener(new []{ "", ""});
 
             app.UseWebApi(config);
         }

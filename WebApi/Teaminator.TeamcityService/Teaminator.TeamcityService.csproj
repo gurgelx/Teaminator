@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildHandler.cs" />
     <Compile Include="TeamcityClient.cs" />
     <Compile Include="TeamcityListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
