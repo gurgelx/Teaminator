@@ -213,5 +213,5 @@ ModelManifest.xml
 
 
 #App config (prevent personal info to get pushed)
-app.config
+//app.config
 
