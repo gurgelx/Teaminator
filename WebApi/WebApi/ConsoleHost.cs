@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using Microsoft.Owin.Hosting;
 
 
@@ -11,6 +12,7 @@ namespace Teaminator.WebApi
             var host = "http://localhost:8080";
             using (WebApp.Start<StartUp>(host))
             {
+                
                 Console.WriteLine("Server is running @ " + host);
                 Console.ReadLine();
             }
