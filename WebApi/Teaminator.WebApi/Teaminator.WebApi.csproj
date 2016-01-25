@@ -91,9 +91,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Teaminator.Domain\Teaminator.Domain.csproj">
+      <Project>{e4a99800-50d8-4d09-b3d0-1b11c75d16b2}</Project>
+      <Name>Teaminator.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Teaminator.MissileService\Teaminator.MissileService.csproj">
       <Project>{5a35a0cf-abbf-43fc-8a2e-57a0293994cd}</Project>
       <Name>Teaminator.MissileService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Teaminator.Settings\Teaminator.Settings.csproj">
+      <Project>{5e71c702-8d00-40bf-bfce-f8bf26f026b6}</Project>
+      <Name>Teaminator.Settings</Name>
     </ProjectReference>
     <ProjectReference Include="..\Teaminator.TeamcityService\Teaminator.TeamcityService.csproj">
       <Project>{e5e9eb52-c7c3-4351-8594-5dbacfaf250e}</Project>

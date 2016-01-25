@@ -7,6 +7,9 @@ namespace Teaminator.WebApi
     {
         public void Configuration(IAppBuilder app)
         {
+            Settings.SettingsManager.Init();
+            var buildsToWatch = Settings.SettingsManager.Settings.BuildIds;
+
             var config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
@@ -14,8 +17,8 @@ namespace Teaminator.WebApi
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            var listner = new TeamcityService.TeamcityListener(new []{ "", ""});
-
+            var listner = new TeamcityService.TeamcityListener(buildsToWatch);
+            
             app.UseWebApi(config);
         }
     }

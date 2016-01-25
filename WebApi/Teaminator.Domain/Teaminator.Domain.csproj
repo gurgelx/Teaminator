@@ -43,6 +43,10 @@
     <Compile Include="Models\Build.cs" />
     <Compile Include="Models\BuildDetails.cs" />
     <Compile Include="Models\BuildsResponse.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserPositionMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

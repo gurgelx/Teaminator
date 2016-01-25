@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teaminator.MissileService",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teaminator.Domain", "Teaminator.Domain\Teaminator.Domain.csproj", "{E4A99800-50D8-4D09-B3D0-1B11C75D16B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teaminator.Settings", "Teaminator.Settings\Teaminator.Settings.csproj", "{5E71C702-8D00-40BF-BFCE-F8BF26F026B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{E4A99800-50D8-4D09-B3D0-1B11C75D16B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4A99800-50D8-4D09-B3D0-1B11C75D16B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4A99800-50D8-4D09-B3D0-1B11C75D16B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E71C702-8D00-40BF-BFCE-F8BF26F026B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E71C702-8D00-40BF-BFCE-F8BF26F026B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E71C702-8D00-40BF-BFCE-F8BF26F026B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E71C702-8D00-40BF-BFCE-F8BF26F026B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

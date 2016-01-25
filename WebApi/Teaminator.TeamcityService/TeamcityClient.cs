@@ -45,8 +45,8 @@ namespace Teaminator.TeamcityService
 
         private void SetCreds()
         {
-            var user = System.Configuration.ConfigurationManager.AppSettings["Username"];
-            var password= System.Configuration.ConfigurationManager.AppSettings["Password"];
+            var user = Settings.SettingsManager.Settings.Username;
+            var password = Settings.SettingsManager.Settings.Password;
             this.CredentialToken = Convert.ToBase64String(Encoding.ASCII.GetBytes(user + ":" + password));
         }
 
