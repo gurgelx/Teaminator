@@ -9,7 +9,7 @@ namespace Teaminator.WebApi
     {
         static void Main(string[] args)
         {
-            var host = "http://localhost:8080";
+            var host = "http://*:8080";
             using (WebApp.Start<StartUp>(host))
             {
                 

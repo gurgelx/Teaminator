@@ -11,15 +11,10 @@ namespace Teaminator.WebApi
             var buildsToWatch = Settings.SettingsManager.Settings.BuildIds;
 
             var config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            config.MapHttpAttributeRoutes();
 
             var listner = new TeamcityService.TeamcityListener(buildsToWatch);
             var launcher = new MissileService.Launcher();
-            //launcher.Aim(1000,500);
             
             app.UseWebApi(config);
         }
