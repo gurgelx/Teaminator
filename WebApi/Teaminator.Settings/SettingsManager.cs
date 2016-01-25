@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using Newtonsoft.Json;
+using Teaminator.Domain.Models;
 
 namespace Teaminator.Settings
 {
@@ -11,7 +13,7 @@ namespace Teaminator.Settings
 
         public static void Init()
         {
-            Settings = new Domain.Models.Settings();
+            Settings = newSettingsFile();
             if(File.Exists(_filename))Load();
             else Save();
         }
@@ -29,6 +31,15 @@ namespace Teaminator.Settings
             var sw = new StreamWriter(_filename, false);
             sw.Write(data);
             sw.Close();
+        }
+
+        private static Domain.Models.Settings newSettingsFile()
+        {
+            var settings = new Domain.Models.Settings();
+            settings.BuildIds = new string[] {};
+            settings.Positions = new List<Position>();
+            settings.UserPositionMappings = new List<UserPositionMapping>();
+            return settings;
         }
 
     }

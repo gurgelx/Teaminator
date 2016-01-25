@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using Teaminator.Domain.Models;
+using Teaminator.Settings;
 
 namespace Teaminator.WebApi.Controllers
 {
@@ -8,31 +11,38 @@ namespace Teaminator.WebApi.Controllers
     public class PlacementController: ApiController
     {
 
+        [HttpGet]
+        [Route("Add/{x},{y}")]
         public int AddPosition(int x, int y)
         {
-            return 0;
-        }
-        public void UpdatePosition(int pos, int x, int y)
-        {
-            
-        }
-        public int AddUser(string user)
-        {
-            return 0;
-        }
-        public void MapPosition(int user, int position)
-        {
-            
+            var position = new Position() {Id = SettingsManager.Settings.Positions.Count, X = x, Y = y};
+            SettingsManager.Settings.Positions.Add(position);
+            SettingsManager.Save();
+            return position.Id;
         }
         [HttpGet]
-        [Route("ListUsers")]
-        public List<String> ListUsers()
+        [Route("Update/{pos}/{x},{y}")]
+        public void UpdatePosition(int pos, int x, int y)
         {
-            return null;
+            var position = SettingsManager.Settings.Positions.First(p => p.Id == pos);
+            position.X = x;
+            position.Y = y;
+            SettingsManager.Save();
         }
-        public List<String> ListPositions()
+        [HttpGet]
+        [Route("Map/{user},{position}")]
+        public bool MapPosition(int user, int position)
         {
-            return null;
+            SettingsManager.Settings.UserPositionMappings.RemoveAll(p => p.UserId == user);
+            SettingsManager.Settings.UserPositionMappings.Add(new UserPositionMapping() {PositionId =  position, UserId = user});
+            SettingsManager.Save();
+            return true;
+        }
+        [HttpGet]
+        [Route("List")]
+        public List<Position> ListPositions()
+        {
+            return SettingsManager.Settings.Positions;
         }
     }
 }

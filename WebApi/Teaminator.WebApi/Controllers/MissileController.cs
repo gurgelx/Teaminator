@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Linq;
+using System.Web.Http;
 using Teaminator.MissileService;
 
 namespace Teaminator.WebApi.Controllers
@@ -37,6 +38,23 @@ namespace Teaminator.WebApi.Controllers
         [Route("missile/aim/{pos}")]
         public bool Aim(int pos)
         {
+            return true;
+        }
+
+        [HttpGet]
+        [Route("missile/attack/{userName}")]
+        public bool Fire(string userName)
+        {
+            var posId = Settings.SettingsManager.Settings.Users.First(u => u.Username == userName).Id;
+            return Fire(posId);
+        }
+        public bool Fire(int userId)
+        {
+            Laucher.Reset();
+            var posId = Settings.SettingsManager.Settings.UserPositionMappings.First(m => m.UserId == userId).PositionId;
+            var pos = Settings.SettingsManager.Settings.Positions.FirstOrDefault(p => p.Id == posId);
+            Laucher.Aim(pos.X,pos.Y);
+            //Laucher.Fire();
             return true;
         }
 
