@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using MissileSharp;
 
 namespace Teaminator.MissileService
@@ -19,13 +20,18 @@ namespace Teaminator.MissileService
             _currentX = 0;
             _currentY = 0;
         }
-
-        public void Aim(int x, int y, bool resetBeforeAim = true)
+       
+        public void Aim(int x, int y)
         {
-            if(resetBeforeAim)
-                Reset();
-            _launcher.Right(x);
-            _launcher.Up(y);
+            if (x < 0)
+                _launcher.Left(Math.Abs(x));
+            else
+                _launcher.Right(x);
+            if (y < 0)
+                _launcher.Down(Math.Abs(y));
+            else
+                _launcher.Up(y);
+
             _currentX += x;
             _currentY += y;
         }

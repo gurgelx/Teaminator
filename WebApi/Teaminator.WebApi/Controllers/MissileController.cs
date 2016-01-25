@@ -5,30 +5,31 @@ namespace Teaminator.WebApi.Controllers
 {
     public class MissileController : ApiController
     {
-        private readonly Launcher _laucher;
+        private static readonly Launcher Laucher = new Launcher();
         public MissileController()
         {
-            this._laucher = new Launcher();
         }
 
-        [Route("missile/aim/current")]
+        [HttpGet]
+        [Route("missile/current")]
         public int[] Current()
         {
-            return this._laucher.GetCurrentDirection();
+            return Laucher.GetCurrentDirection();
         }
 
         [HttpGet]
         [Route("missile/reset")]
-        public void Reset()
+        public bool Reset()
         {
-            this._laucher.Reset();
+            Laucher.Reset();
+            return true;
         }
 
         [HttpGet]
         [Route("missile/aim/{x},{y}")]
         public bool Aim(int x, int y)
         {
-            this._laucher.Aim(x, y, true);
+            Laucher.Aim(x, y);
             return true;
         }
 
@@ -43,7 +44,7 @@ namespace Teaminator.WebApi.Controllers
         [Route("missile/fire")]
         public bool Fire()
         {
-            this._laucher.Fire();
+            Laucher.Fire();
             return true;
         }
     }
