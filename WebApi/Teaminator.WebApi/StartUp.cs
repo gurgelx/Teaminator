@@ -18,6 +18,8 @@ namespace Teaminator.WebApi
             );
 
             var listner = new TeamcityService.TeamcityListener(buildsToWatch);
+            var launcher = new MissileService.Launcher();
+            //launcher.Aim(1000,500);
             
             app.UseWebApi(config);
         }

@@ -1,23 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using Teaminator.Domain.Models;
 
 namespace Teaminator.WebApi.Controllers
 {
     public class UserController: ApiController
     {
-        public IEnumerable<string> Get()
+        public IEnumerable<User> Get()
         {
-            return new string[] {"user", "user 2"};
+            return Settings.SettingsManager.Settings.Users;
         }
 
-        public string Get(int id)
+        public User Get(int id)
         {
-            return "user";
+            return Settings.SettingsManager.Settings.Users.FirstOrDefault(u => u.Id == id);
         }
 
         public int Post([FromBody] string userName)
         {
-            return 0;
+            var user = new User() {Username = userName, Id = Settings.SettingsManager.Settings.Users.Count};
+            Settings.SettingsManager.Settings.Users.Add(user);
+            Settings.SettingsManager.Save();
+            return user.Id;
         }
     }
 }
