@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
+using System.Threading.Tasks;
 
 namespace Teaminator.TeamcityService
 {
@@ -9,28 +9,36 @@ namespace Teaminator.TeamcityService
 
         public event EventHandler<EventArgs> BuildError;
         public event EventHandler<EventArgs> BuildSuccess;
-        public event EventHandler<EventArgs> BuildRunning;
 
-        public String[] TargetProjects { get; set; }
-        public TeamcityClient Client;
+        private readonly BuildHandler _handler;
         public TeamcityListener(string[] targetProjects)
         {
-            this.TargetProjects = targetProjects;
-            this.Client = new TeamcityClient("http://teamcity/", new BuildHandler(targetProjects));
+            _handler = new BuildHandler(targetProjects);
+        }
 
-            this.Client.GetBuilds().ContinueWith(result =>
+        public void Begin()
+        {
+            Task.Run(() =>
             {
-                foreach (var build in result.Result.Where(b => b.status == "SUCCESS"))
+                while (true)
                 {
-                    Client.GetBuild(build.id);
-                    BuildSuccess?.Invoke(build, null);
-                }
-
-                foreach (var build in result.Result.Where(b => b.status == "FAILURE"))
-                {
-                    BuildError?.Invoke(build, null);
+                    GetAndTriggerUpdates();
+                    System.Threading.Thread.Sleep(20000);   
                 }
             });
+        }
+
+        private void GetAndTriggerUpdates()
+        {
+            var updatedBuilds = _handler.GetUpdates();
+            if (updatedBuilds != null)
+            {
+                if (BuildSuccess != null)
+                    updatedBuilds.Where(b => b.status == "SUCCESS").ToList().ForEach(b => BuildSuccess.Invoke(b, null));
+
+                if (BuildError != null)
+                    updatedBuilds.Where(b => b.status == "FAILURE").ToList().ForEach(b => BuildError.Invoke(b, null));
+            }
         }
     }
 }

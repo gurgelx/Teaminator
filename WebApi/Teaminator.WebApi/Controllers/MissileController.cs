@@ -1,28 +1,25 @@
-﻿using System.Linq;
+﻿using System;
 using System.Web.Http;
-using Teaminator.MissileService;
+using Microsoft.Owin;
 
 namespace Teaminator.WebApi.Controllers
 {
     public class MissileController : ApiController
     {
-        private static readonly Launcher Laucher = new Launcher();
-        public MissileController()
-        {
-        }
+        private static readonly UserMissileService MissileService = new UserMissileService();
 
         [HttpGet]
         [Route("missile/current")]
         public int[] Current()
         {
-            return Laucher.GetCurrentDirection();
+            return MissileService.GetCurrentDirection();
         }
 
         [HttpGet]
         [Route("missile/reset")]
         public bool Reset()
         {
-            Laucher.Reset();
+            MissileService.Reset();
             return true;
         }
 
@@ -30,7 +27,7 @@ namespace Teaminator.WebApi.Controllers
         [Route("missile/aim/{x},{y}")]
         public bool Aim(int x, int y)
         {
-            Laucher.Aim(x, y);
+            MissileService.Aim(x,y);
             return true;
         }
 
@@ -38,31 +35,33 @@ namespace Teaminator.WebApi.Controllers
         [Route("missile/aim/{pos}")]
         public bool Aim(int pos)
         {
+            MissileService.Aim(pos);
             return true;
         }
 
         [HttpGet]
-        [Route("missile/attack/{userName}")]
-        public bool Fire(string userName)
+        [Route("missile/threat/{username}")]
+        public bool Threat(string username)
         {
-            var posId = Settings.SettingsManager.Settings.Users.First(u => u.Username == userName).Id;
-            return Fire(posId);
+            return MissileService.AimAtUser(username);
         }
-        public bool Fire(int userId)
+
+        [HttpGet]
+        [Route("missile/attack/{username}")]
+        public bool Fire(string username)
         {
-            Laucher.Reset();
-            var posId = Settings.SettingsManager.Settings.UserPositionMappings.First(m => m.UserId == userId).PositionId;
-            var pos = Settings.SettingsManager.Settings.Positions.FirstOrDefault(p => p.Id == posId);
-            Laucher.Aim(pos.X,pos.Y);
-            //Laucher.Fire();
-            return true;
+            var requestInfo = ((OwinContext) Request.Properties["MS_OwinContext"]).Request;
+            Console.WriteLine("ATTACK " + username);
+            Console.WriteLine(requestInfo.RemoteIpAddress);
+            
+            return MissileService.AttackUser(username);
         }
 
         [HttpGet]
         [Route("missile/fire")]
         public bool Fire()
         {
-            Laucher.Fire();
+            MissileService.Fire();
             return true;
         }
     }

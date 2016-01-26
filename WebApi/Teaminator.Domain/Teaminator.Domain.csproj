@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Build.cs" />
-    <Compile Include="Models\BuildDetails.cs" />
+    <Compile Include="Models\TeamCity\BuildDetails.cs" />
     <Compile Include="Models\BuildsResponse.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Settings.cs" />

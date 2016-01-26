@@ -38,6 +38,7 @@ namespace Teaminator.MissileService
 
         public void Fire(int shots = 1)
         {
+            Console.WriteLine("FIRE @ X:" + _currentX + " Y:" + _currentY);
             _launcher.Fire(shots);
         }
 
