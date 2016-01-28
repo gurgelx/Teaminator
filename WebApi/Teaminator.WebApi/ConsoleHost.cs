@@ -9,11 +9,18 @@ namespace Teaminator.WebApi
     {
         static void Main(string[] args)
         {
-            var host = "http://*:8080";
-            using (WebApp.Start<StartUp>(host))
+            try
             {
-                
-                Console.WriteLine("Server is running @ " + host);
+                var host = "http://*:8080";
+                using (WebApp.Start<StartUp>(host))
+                {
+                    Console.WriteLine("Server is running @ " + host);
+                    Console.ReadLine();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
                 Console.ReadLine();
             }
         }

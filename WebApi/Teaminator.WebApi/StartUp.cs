@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Web.Http;
 using Owin;
@@ -36,7 +37,7 @@ namespace Teaminator.WebApi
                     switch (build.state)
                     {
                         case "running":
-                            missileService.AimAtUser(build.lastChanges.change.First().username);
+                            missileService.AimAtUser(GetUsername(build));
                             break;
                         case "finished":
                             missileService.Nod();
@@ -49,13 +50,13 @@ namespace Teaminator.WebApi
             {
                 var build = sender as BuildDetails;
                 if (currentThreat == null) currentThreat = build;
-                missileService.AimAtUser(currentThreat.lastChanges.change.First().username);
+                missileService.AimAtUser(GetUsername(currentThreat));
 
                 killTimer = new Thread(() =>
                 {
-                    Thread.Sleep(300000);
+                    Thread.Sleep(1000 * new Random(DateTime.Now.Millisecond).Next(10));
                     if (currentThreat != null)
-                        missileService.AttackUser(currentThreat.lastChanges.change.First().username);
+                        missileService.AttackUser(GetUsername(currentThreat));
                 });
                 killTimer.Start();
             };
@@ -65,6 +66,12 @@ namespace Teaminator.WebApi
 
 
             app.UseWebApi(config);
+        }
+
+        private string GetUsername(BuildDetails build)
+        {
+            if (build.lastChanges == null || build.lastChanges.change == null) return "";
+            return build.lastChanges.change.First().username;
         }
     }
 }

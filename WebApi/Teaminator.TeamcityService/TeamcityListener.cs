@@ -33,6 +33,8 @@ namespace Teaminator.TeamcityService
             var updatedBuilds = _handler.GetUpdates();
             if (updatedBuilds != null)
             {
+                updatedBuilds.ForEach(b => Console.WriteLine("Build trigger: " + b.id + ", " + b.status + ", " + b.state));
+
                 if (BuildSuccess != null)
                     updatedBuilds.Where(b => b.status == "SUCCESS").ToList().ForEach(b => BuildSuccess.Invoke(b, null));
 
