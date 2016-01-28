@@ -50,7 +50,8 @@ namespace Teaminator.WebApi
             {
                 var build = sender as BuildDetails;
                 if (currentThreat == null) currentThreat = build;
-                missileService.AimAtUser(GetUsername(currentThreat));
+                if(!missileService.AimAtUser(GetUsername(currentThreat)))
+                    missileService.Shake();
 
                 killTimer = new Thread(() =>
                 {

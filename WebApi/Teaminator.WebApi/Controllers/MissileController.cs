@@ -64,5 +64,21 @@ namespace Teaminator.WebApi.Controllers
             MissileService.Fire();
             return true;
         }
+
+        [HttpGet]
+        [Route("missile/nod")]
+        public bool Nod()
+        {
+            MissileService.Nod();
+            return true;
+        }
+
+        [HttpGet]
+        [Route("missile/shake")]
+        public bool Shake()
+        {
+            MissileService.Shake();
+            return true;
+        }
     }
 }
