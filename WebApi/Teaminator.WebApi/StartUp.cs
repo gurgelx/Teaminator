@@ -29,8 +29,8 @@ namespace Teaminator.WebApi
                 if (currentThreat != null && build.buildTypeId == currentThreat.buildTypeId)
                 {
                     currentThreat = null;
-                    missileService.Reset();
-                    killTimer?.Abort();
+                    //missileService.Reset();
+                    //killTimer?.Abort();
                 }
                 else
                 {
@@ -49,17 +49,18 @@ namespace Teaminator.WebApi
             listner.BuildError += (sender, args) =>
             {
                 var build = sender as BuildDetails;
-                if (currentThreat == null) currentThreat = build;
-                if(!missileService.AimAtUser(GetUsername(currentThreat)))
+                //if (currentThreat == null) currentThreat = build;
+                if(!missileService.AimAtUser(GetUsername(build)))
                     missileService.Shake();
+                else
+                    missileService.AttackUser(GetUsername(build));
+                //killTimer = new Thread(() =>
+                //{
+                //    Thread.Sleep(1000 * new Random(DateTime.Now.Millisecond).Next(10));
+                //    if (currentThreat != null)
 
-                killTimer = new Thread(() =>
-                {
-                    Thread.Sleep(1000 * new Random(DateTime.Now.Millisecond).Next(10));
-                    if (currentThreat != null)
-                        missileService.AttackUser(GetUsername(currentThreat));
-                });
-                killTimer.Start();
+                //});
+                //killTimer.Start();
             };
 
             listner.Begin();
