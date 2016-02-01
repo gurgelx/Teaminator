@@ -4,6 +4,8 @@ using Microsoft.Owin;
 
 namespace Teaminator.WebApi.Controllers
 {
+    using System.Linq;
+
     public class MissileController : ApiController
     {
         private static readonly UserMissileService MissileService = new UserMissileService();
@@ -53,7 +55,7 @@ namespace Teaminator.WebApi.Controllers
             var requestInfo = ((OwinContext) Request.Properties["MS_OwinContext"]).Request;
             Console.WriteLine("ATTACK " + username);
             Console.WriteLine(requestInfo.RemoteIpAddress);
-            
+
             return MissileService.AttackUser(username);
         }
 
@@ -63,6 +65,18 @@ namespace Teaminator.WebApi.Controllers
         {
             MissileService.Fire();
             return true;
+        }
+
+        [HttpGet]
+        [Route("missile/attack/random")]
+        public bool RandomFire()
+        {
+            var userName = Settings.SettingsManager.Settings.Users.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+            if (userName == null) return false;
+
+            Console.WriteLine("ATTACK " + userName.Username);
+            MissileService.Reset();
+            return MissileService.AttackUser(userName.Username);
         }
 
         [HttpGet]
